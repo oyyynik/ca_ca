@@ -40,7 +40,7 @@ def main():
             winner = chack_win()
             if winner:
                     draw_board()
-                    print(winner< "Виграв!")
+                    print("Виграв!")
                     break
             
             if counter > 8:
