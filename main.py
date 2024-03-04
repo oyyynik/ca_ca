@@ -1,42 +1,51 @@
-import keyboard
+board = list(range(1,10))
 
-def on_key_event(event):
-    if event.event_type == keyboard.KEY_DOWN:
-        print(f"Key {event.name} was pressed")
-    #elif event.event_type == keyboard.KEY_UP:
-       #print(f"Key {event.name} was released")
+wins_coord = [(1,2,3),(4,5,6),(7,8,9),(2,5,8),(3,6,9),(1,5,9),(3,5,7)]
 
-keyboard.on_press(on_key_event)
-#keyboard.on_release(on_key_event)
+def draw_board():
+    print('-----------')
+    for i in range(3):
+        print('|', board[0 + i * 3], '|', board[1 + i * 3], '|' , board[2 + i * 3], '|')
+    print('-----------')
 
-print("Listening for keyboard events. Press 'Esc' to quit.")
-keyboard.wait("esc")  # This will wait until the 'Esc' key is pressed;
+def take_input(playar_token):
+    while True:
+        value = input('Куда поставити: ' + playar_token + '?')
+        if not (value in '123456789'):
+            print('Помилковий ввід. Повторіть.')
+            continue
+        value = int(value)
+        if str(board[value - 1]) in 'XO':
+            print('Ця клітинка вже заннята')
+            continue
+        board[value - 1] = playar_token
+        break
 
-# import keyboard
+def chack_win():
+    for each in wins_coord:
+        if (board[each[0]-1]) == (board[each[1]-1]) == (board[each[2]-1]):
+            return board[each[0] - 1]
+            return False
+        
+def main():
+    counter = 0
+    while True:
+        counter +=1
+        draw_board()
+        if counter % 2 == 0:
+            take_input('X')
+        else:
+            take_input('O')
+        if counter > 3:
+            winner = chack_win()
+            if winner:
+                    draw_board()
+                    print(winner< "Виграв!")
+                    break
+            
+            if counter > 8:
+                draw_board()
+                print('Нічія!')
+                break
 
-# def print_array(array: list[str]):
-#     print(f"""
-#     +---+---+---+
-#     | {array[0]} | {array[1]} | {array[2]} |
-#     +---+---+---+
-#     | {array[3]} | {array[4]} | {array[5]} |
-#     +---+---+---+
-#     | {array[6]} | {array[7]} | {array[8]} |
-#     +---+---+---+
-#     """)
-
-# while True:
-#     if keyboard.read_key() == "p":
-#         print("p")
-
-# array: list[str] = [
-#     "0", "O", " ",
-#     "0", "O", " ",
-#     "0", "O", " ",
-# ]
-
-# print_array(array)
-
-# array[0] = "/"
-
-# print_array(array)
+main()
