@@ -3,10 +3,10 @@ board = list(range(1,10))
 wins_coord = [(1,2,3),(4,5,6),(7,8,9),(2,5,8),(3,6,9),(1,5,9),(3,5,7)]
 
 def draw_board():
-    print('+-----------+')
+    print('-----------')
     for i in range(3):
         print('|', board[0 + i * 3], '|', board[1 + i * 3], '|' , board[2 + i * 3], '|')
-    print('+-----------+')
+    print('-----------')
 
 def take_input(playar_token):
     while True:
@@ -40,7 +40,7 @@ def main():
             winner = chack_win()
             if winner:
                     draw_board()
-                    print(f"Виграв гравець {winner}!")
+                    print("Виграв!")
                     break
             
             if counter > 8:
